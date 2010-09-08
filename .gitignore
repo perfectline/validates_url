@@ -1,0 +1,6 @@
+coverage
+pkg
+rdoc
+test/tmp
+tmp
+.idea
