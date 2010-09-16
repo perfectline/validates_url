@@ -1,5 +1,3 @@
-require 'active_model/validations'
-
 class User
   include ActiveModel::Validations
 

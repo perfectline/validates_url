@@ -1,6 +1,20 @@
 require 'spec_helper'
 
-describe "URL validation", Perfectline::ValidatesUrl::Rails3::UrlValidator do
+describe "URL validation" do
+
+  before(:all) do
+    ActiveRecord::Schema.define(:version => 1) do
+
+      create_table :users, :force => true do |t|
+        t.column :homepage, :string
+      end
+
+    end
+  end
+
+  after(:all) do
+    ActiveRecord::Base.connection.drop_table(:users)
+  end
 
   context "with regular validator" do
     before do
@@ -32,6 +46,10 @@ describe "URL validation", Perfectline::ValidatesUrl::Rails3::UrlValidator do
       @user.should be_valid
     end
 
+    it "shout not allow a url with an invalid scheme" do
+      @user.homepage = "ftp://localhost"
+      @user.should_not be_valid
+    end
   end
 
   context "with allow nil" do
@@ -94,6 +112,28 @@ describe "URL validation", Perfectline::ValidatesUrl::Rails3::UrlValidator do
     it "should allow a valid url" do
       @user.homepage = "http://www.example.com"
       @user.should be_valid
+    end
+
+    it "should not allow invalid url" do
+      @user.homepage = "random"
+      @user.should_not be_valid
+    end
+  end
+
+  context "with ActiveRecord" do
+    before do
+      @user = UserWithAr.new
+    end
+
+    it "should not allow invalid url" do
+      @user.homepage = "random"
+      @user.should_not be_valid
+    end
+  end
+
+  context "with ActiveRecord and legacy syntax" do
+    before do
+      @user = UserWithArLegacy.new
     end
 
     it "should not allow invalid url" do
