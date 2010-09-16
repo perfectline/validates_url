@@ -16,6 +16,7 @@ Jeweler::Tasks.new do |jewel|
   jewel.authors         = ["Tanel Suurhans", "Tarmo Lehtpuu"]
   jewel.files           = FileList["rails/*.rb", "lib/**/*.rb", "*.rb", "MIT-LICENCE", "README.markdown"]
 
+  jewel.add_dependency 'active_model', '>= 3.0.0'
   jewel.add_development_dependency 'rspec'
   jewel.add_development_dependency 'diff-lcs', '>= 1.1.2'
 end

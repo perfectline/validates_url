@@ -48,9 +48,6 @@ module Perfectline
     module Rails3
       require 'active_model'
       require 'active_model/validations'
-      require 'active_support/concern'
-
-      extend ActiveSupport::Concern
 
       class UrlValidator < ActiveModel::EachValidator
         def initialize(options)
@@ -76,7 +73,8 @@ module Perfectline
 end
 
 if Rails::VERSION::MAJOR >= 3
-  ActiveModel::Validations.send(:include, Perfectline::ValidatesUrl::Rails3)
+  ActiveModel::Validations::UrlValidator = Perfectline::ValidatesUrl::Rails3::UrlValidator
+  ActiveModel::Validations::HelperMethods.send(:include, Perfectline::ValidatesUrl::Rails3::ClassMethods)
 else
   ActiveRecord::Base.send(:include, Perfectline::ValidatesUrl::Rails2)
 end
