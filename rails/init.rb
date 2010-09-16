@@ -1,1 +1,0 @@
-require 'validates_url'

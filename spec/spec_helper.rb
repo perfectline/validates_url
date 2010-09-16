@@ -14,7 +14,7 @@ ActiveRecord::Base.establish_connection(
     "database"  => ":memory:"
 )
 
-require File.join(File.dirname(__FILE__), '..', 'rails', 'init')
+require File.join(File.dirname(__FILE__), '..', 'init')
 
 autoload :User,                 'resources/user'
 autoload :UserWithNil,          'resources/user_with_nil'

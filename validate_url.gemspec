@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{validate_url}
-  s.version = "0.1.3"
+  s.version = "0.1.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tanel Suurhans", "Tarmo Lehtpuu"]
@@ -17,9 +17,9 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     "README.markdown",
+     "init.rb",
      "install.rb",
-     "lib/validates_url.rb",
-     "rails/init.rb"
+     "lib/validate_url.rb"
   ]
   s.homepage = %q{http://github.com/perfectline/validates_url/tree/master}
   s.rdoc_options = ["--charset=UTF-8"]
@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{Library for validating urls in Rails.}
   s.test_files = [
-    "spec/validates_url_spec.rb",
+    "spec/validate_url_spec.rb",
      "spec/resources/user_with_blank.rb",
      "spec/resources/user_with_nil.rb",
      "spec/resources/user_with_ar.rb",
