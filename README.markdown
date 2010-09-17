@@ -40,8 +40,11 @@ You can pass the `:message => "my custom error"` option to your validation to de
 
 ## Authors
 
-**Tanel Suurhans** (<http://twitter.com/tanelsuurhans>)
+**Tanel Suurhans** (<http://twitter.com/tanelsuurhans>)  
 **Tarmo Lehtpuu** (<http://twitter.com/tarmolehtpuu>)
+
+## Contributions
+Thanks to **Steve Smith** for making the validation process even simpler.
 
 ## License
 Copyright 2010 by PerfectLine LLC (<http://www.perfectline.co.uk>) and is released under the MIT license.
