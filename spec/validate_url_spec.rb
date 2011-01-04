@@ -147,4 +147,14 @@ describe "URL validation" do
     end
   end
 
+  context "with regular validator and custom scheme" do
+    before do
+      @user = UserWithCustomScheme.new
+    end
+    
+    it "should allow alternative URI schemes" do
+      @user.homepage = "ftp://ftp.example.com"
+      @user.should be_valid
+    end
+  end
 end
