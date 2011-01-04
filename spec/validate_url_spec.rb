@@ -46,10 +46,15 @@ describe "URL validation" do
       @user.should be_valid
     end
 
-    it "shout not allow a url with an invalid scheme" do
+    it "should not allow a url with an invalid scheme" do
       @user.homepage = "ftp://localhost"
       @user.should_not be_valid
     end
+    
+    it "should not allow a url with only a scheme" do
+      @user.homepage = "http://"
+      @user.should_not be_valid
+    end    
   end
 
   context "with allow nil" do
@@ -67,7 +72,7 @@ describe "URL validation" do
       @user.should_not be_valid
     end
 
-    it "shoild allow a valid url" do
+    it "should allow a valid url" do
       @user.homepage = "http://www.example.com"
       @user.should be_valid
     end

@@ -14,7 +14,13 @@ module ActiveModel
       def validate_each(record, attribute, value)
         schemes = [*options.fetch(:schemes)].map(&:to_s)
 
-        unless URI::regexp(schemes).match(value)
+        if URI::regexp(schemes).match(value)
+          begin
+            URI.parse(value)
+          rescue URI::InvalidURIError
+            record.errors.add(attribute, options.fetch(:message), :value => value)
+          end
+        else
           record.errors.add(attribute, options.fetch(:message), :value => value)
         end
       end
