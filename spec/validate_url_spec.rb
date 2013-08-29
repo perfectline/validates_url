@@ -50,11 +50,16 @@ describe "URL validation" do
       @user.homepage = "ftp://localhost"
       @user.should_not be_valid
     end
-    
+
     it "should not allow a url with only a scheme" do
       @user.homepage = "http://"
       @user.should_not be_valid
-    end    
+    end
+
+    it "should allow a url with an underscore" do
+      @user.homepage = "http://foo_bar.com"
+      @user.should be_valid
+    end
   end
 
   context "with allow nil" do
@@ -76,6 +81,11 @@ describe "URL validation" do
       @user.homepage = "http://www.example.com"
       @user.should be_valid
     end
+
+    it "should allow a url with an underscore" do
+      @user.homepage = "http://foo_bar.com"
+      @user.should be_valid
+    end
   end
 
   context "with allow blank" do
@@ -95,6 +105,11 @@ describe "URL validation" do
 
     it "should allow a valid url" do
       @user.homepage = "http://www.example.com"
+      @user.should be_valid
+    end
+
+    it "should allow a url with an underscore" do
+      @user.homepage = "http://foo_bar.com"
       @user.should be_valid
     end
   end
@@ -122,6 +137,11 @@ describe "URL validation" do
     it "should not allow invalid url" do
       @user.homepage = "random"
       @user.should_not be_valid
+    end
+
+    it "should allow a url with an underscore" do
+      @user.homepage = "http://foo_bar.com"
+      @user.should be_valid
     end
   end
 
@@ -151,7 +171,7 @@ describe "URL validation" do
     before do
       @user = UserWithCustomScheme.new
     end
-    
+
     it "should allow alternative URI schemes" do
       @user.homepage = "ftp://ftp.example.com"
       @user.should be_valid

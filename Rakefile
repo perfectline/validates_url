@@ -1,5 +1,5 @@
 require 'rake'
-require 'rake/rdoctask'
+require 'rdoc/task'
 require 'rake/clean'
 require 'rspec/core/rake_task'
 require 'jeweler'
@@ -22,7 +22,7 @@ Jeweler::Tasks.new do |jewel|
 end
 
 desc 'Generate documentation plugin.'
-Rake::RDocTask.new(:rdoc) do |rdoc|
+RDoc::Task.new(:rdoc) do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
   rdoc.title    = 'ValidatesUrl'
   rdoc.options << '--line-numbers' << '--inline-source'
@@ -31,4 +31,4 @@ Rake::RDocTask.new(:rdoc) do |rdoc|
 end
 
 desc 'Run all rspec tests'
-RSpec::Core::RakeTask.new
+RSpec::Core::RakeTask.new(:test)
