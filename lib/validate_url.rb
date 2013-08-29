@@ -1,4 +1,4 @@
-require 'uri'
+require 'addressable/uri'
 require 'active_model'
 
 module ActiveModel
@@ -13,14 +13,12 @@ module ActiveModel
 
       def validate_each(record, attribute, value)
         schemes = [*options.fetch(:schemes)].map(&:to_s)
-
-        if URI::regexp(schemes).match(value)
-          begin
-            URI.parse(value)
-          rescue URI::InvalidURIError
+        begin
+          uri = Addressable::URI.parse(value)
+          unless uri && schemes.include?(uri.scheme)
             record.errors.add(attribute, options.fetch(:message), :value => value)
           end
-        else
+        rescue Addressable::URI::InvalidURIError
           record.errors.add(attribute, options.fetch(:message), :value => value)
         end
       end
@@ -40,7 +38,7 @@ module ActiveModel
       # * <tt>:allow_nil</tt> - If set to true, skips this validation if the attribute is +nil+ (default is +false+).
       # * <tt>:allow_blank</tt> - If set to true, skips this validation if the attribute is blank (default is +false+).
       # * <tt>:schemes</tt> - Array of URI schemes to validate against. (default is +['http', 'https']+)
-      
+
       def validates_url(*attr_names)
         validates_with UrlValidator, _merge_attributes(attr_names)
       end
