@@ -3,35 +3,44 @@
 This gem adds the capability of validating URLs to ActiveRecord and ActiveModel (Rails 3).
 
 ### Installation
-    # add this to your Gemfile
-    gem "validate_url"
+    
+```    
+# add this to your Gemfile
+gem "validate_url"
 
-    # and  run
-    sudo gem install validate_url
+# and  run
+sudo gem install validate_url
+```
 
 ### Usage
 
 #### With ActiveRecord
-    class Pony < ActiveRecord::Base
-      # standard validation
-      validates :homepage, :url => true
 
-      # with allow_nil
-      validates :homepage, :url => {:allow_nil => true}
+```ruby    
+class Pony < ActiveRecord::Base
+  # standard validation
+  validates :homepage, :url => true
 
-      # with allow_blank
-      validates :homepage, :url => {:allow_blank => true}
-    end
+  # with allow_nil
+  validates :homepage, :url => {:allow_nil => true}
+
+  # with allow_blank
+  validates :homepage, :url => {:allow_blank => true}
+end
+```
 
 #### With ActiveModel
-    class Unicorn
-      include ActiveModel::Validations
 
-      attr_accessor :homepage
+```ruby
+class Unicorn
+  include ActiveModel::Validations
 
-      # with legacy syntax (the syntax above works also)
-      validates_url :homepage, :allow_blank => true
-    end
+  attr_accessor :homepage
+
+  # with legacy syntax (the syntax above works also)
+  validates_url :homepage, :allow_blank => true
+end
+```
 
 #### I18n
 
