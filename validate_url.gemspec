@@ -13,10 +13,10 @@ Gem::Specification.new do |s|
   s.description = %q{Library for validating urls in Rails.}
   s.email = ["tanel.suurhans@perfectline.ee", "tarmo.lehtpuu@perfectline.ee"]
   s.extra_rdoc_files = [
-    "README.markdown"
+    "README.md"
   ]
   s.files = [
-    "README.markdown",
+    "README.md",
     "init.rb",
     "install.rb",
     "lib/validate_url.rb"
