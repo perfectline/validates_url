@@ -17,6 +17,7 @@ Jeweler::Tasks.new do |jewel|
   jewel.files           = FileList["lib/**/*.rb", "*.rb", "MIT-LICENCE", "README.markdown"]
 
   jewel.add_dependency 'activemodel', '>= 3.0.0'
+  jewel.add_dependency 'addressable'
   jewel.add_development_dependency 'rspec'
   jewel.add_development_dependency 'diff-lcs', '>= 1.1.2'
 end
