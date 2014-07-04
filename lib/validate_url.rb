@@ -1,4 +1,4 @@
-require 'addressable/uri'
+require 'uri'
 require 'active_model'
 
 module ActiveModel
@@ -14,11 +14,11 @@ module ActiveModel
       def validate_each(record, attribute, value)
         schemes = [*options.fetch(:schemes)].map(&:to_s)
         begin
-          uri = Addressable::URI.parse(value)
+          uri = URI.parse(value)
           unless uri && schemes.include?(uri.scheme)
             record.errors.add(attribute, options.fetch(:message), :value => value)
           end
-        rescue Addressable::URI::InvalidURIError
+        rescue URI::InvalidURIError
           record.errors.add(attribute, options.fetch(:message), :value => value)
         end
       end

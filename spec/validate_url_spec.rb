@@ -56,9 +56,14 @@ describe "URL validation" do
       @user.should_not be_valid
     end
 
-    it "should allow a url with an underscore" do
+    it "should not allow a url with an invalid hostname" do
+      @user.homepage = "http://www,example.com"
+      @user.should_not be_valid
+    end
+
+    it "should not allow a url with an underscore" do
       @user.homepage = "http://foo_bar.com"
-      @user.should be_valid
+      @user.should_not be_valid
     end
   end
 
@@ -82,9 +87,9 @@ describe "URL validation" do
       @user.should be_valid
     end
 
-    it "should allow a url with an underscore" do
+    it "should not allow a url with an underscore" do
       @user.homepage = "http://foo_bar.com"
-      @user.should be_valid
+      @user.should_not be_valid
     end
   end
 
@@ -108,9 +113,9 @@ describe "URL validation" do
       @user.should be_valid
     end
 
-    it "should allow a url with an underscore" do
+    it "should not allow a url with an underscore" do
       @user.homepage = "http://foo_bar.com"
-      @user.should be_valid
+      @user.should_not be_valid
     end
   end
 
@@ -139,9 +144,9 @@ describe "URL validation" do
       @user.should_not be_valid
     end
 
-    it "should allow a url with an underscore" do
+    it "should not allow a url with an underscore" do
       @user.homepage = "http://foo_bar.com"
-      @user.should be_valid
+      @user.should_not be_valid
     end
   end
 
