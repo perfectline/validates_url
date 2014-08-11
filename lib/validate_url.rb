@@ -7,7 +7,7 @@ module ActiveModel
 
       def initialize(options)
         options.reverse_merge!(:schemes => %w(http https))
-        options.reverse_merge!(:message => "is not a valid URL")
+        options.reverse_merge!(:message => :invalid)
         super(options)
       end
 
