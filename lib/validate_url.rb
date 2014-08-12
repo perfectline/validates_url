@@ -1,5 +1,7 @@
 require 'addressable/uri'
 require 'active_model'
+require 'active_support/i18n'
+I18n.load_path << File.dirname(__FILE__) + '/locale/en.yml'
 
 module ActiveModel
   module Validations
@@ -7,7 +9,7 @@ module ActiveModel
 
       def initialize(options)
         options.reverse_merge!(:schemes => %w(http https))
-        options.reverse_merge!(:message => :invalid)
+        options.reverse_merge!(:message => :url)
         super(options)
       end
 
