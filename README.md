@@ -3,8 +3,8 @@
 This gem adds the capability of validating URLs to ActiveRecord and ActiveModel (Rails 3).
 
 ## Installation
-    
-```    
+
+```
 # add this to your Gemfile
 gem "validate_url"
 
@@ -16,7 +16,7 @@ sudo gem install validate_url
 
 ### With ActiveRecord
 
-```ruby    
+```ruby
 class Pony < ActiveRecord::Base
   # standard validation
   validates :homepage, :url => true
@@ -26,6 +26,12 @@ class Pony < ActiveRecord::Base
 
   # with allow_blank
   validates :homepage, :url => {:allow_blank => true}
+
+   # with custom schemes
+   validates :homepage, :url => {schemes: %w(ftp)}
+
+   # with empty scheme allowed
+   validates :homepage, :url => {:allow_blank_scheme => true}
 end
 ```
 

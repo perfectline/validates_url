@@ -195,4 +195,15 @@ describe "URL validation" do
       @user.errors[:homepage].should == ["wrong"]
     end
   end
+
+  context "with allow blank scheme" do
+    before do
+      @user = UserWithBlankScheme.new
+    end
+
+    it "should allow url without scheme" do
+      @user.homepage = "www.facebook.com/username"
+      @user.should be_valid
+    end
+  end
 end
