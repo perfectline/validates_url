@@ -17,8 +17,15 @@ module ActiveModel
         schemes = [*options.fetch(:schemes)].map(&:to_s)
         begin
           uri = Addressable::URI.parse(value)
-          unless uri && schemes.include?(uri.scheme)
-            record.errors.add(attribute, options.fetch(:message), :value => value)
+          case uri
+          when nil
+            record.errors.add(attribute, options.fetch(:message), :value => value) unless options[:allow_nil]
+          when ""
+            record.errors.add(attribute, options.fetch(:message), :value => value) unless options[:allow_blank]
+          else
+            unless options[:allow_blank_scheme] || schemes.include?(uri.scheme)
+              record.errors.add(attribute, options.fetch(:message), :value => value)
+            end
           end
         rescue Addressable::URI::InvalidURIError
           record.errors.add(attribute, options.fetch(:message), :value => value)
@@ -40,6 +47,7 @@ module ActiveModel
       # * <tt>:allow_nil</tt> - If set to true, skips this validation if the attribute is +nil+ (default is +false+).
       # * <tt>:allow_blank</tt> - If set to true, skips this validation if the attribute is blank (default is +false+).
       # * <tt>:schemes</tt> - Array of URI schemes to validate against. (default is +['http', 'https']+)
+      # * <tt>:allow_blank_scheme</tt> - If set to true, URL without scheme is allowed
 
       def validates_url(*attr_names)
         validates_with UrlValidator, _merge_attributes(attr_names)
