@@ -94,6 +94,32 @@ describe "URL validation" do
     end
   end
 
+  context "with require protocol" do
+    before do
+      @user = UserWithRequireProtocol.new
+    end
+
+    it "should allow nil as url" do
+      @user.homepage = nil
+      @user.should be_valid
+    end
+
+    it "should allow blank as url" do
+      @user.homepage = ""
+      @user.should be_valid
+    end
+
+    it "should allow a valid url" do
+      @user.homepage = "http://www.example.com"
+      @user.should be_valid
+    end
+
+    it "should not allow a url without a protocol" do
+      @user.homepage = "www.example.com"
+      @user.should_not be_valid
+    end
+  end
+
   context "with allow blank" do
     before do
       @user = UserWithBlank.new

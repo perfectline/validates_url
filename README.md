@@ -26,6 +26,9 @@ class Pony < ActiveRecord::Base
 
   # with allow_blank
   validates :homepage, :url => {:allow_blank => true}
+
+  # with require_protocol, needs to include a protocol:// prefix
+  validates :homepage, :url => {:require_protocol => true}
 end
 ```
 
