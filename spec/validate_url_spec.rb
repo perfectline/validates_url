@@ -56,7 +56,7 @@ describe "URL validation" do
       @user.should_not be_valid
     end
     
-    it "should not allow a url with a partial scheme" do
+    it "should not allow a url without a host" do
       @user.homepage = "http:/"
       @user.should_not be_valid
     end
