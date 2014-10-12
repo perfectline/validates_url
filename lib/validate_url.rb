@@ -10,18 +10,20 @@ module ActiveModel
       def initialize(options)
         options.reverse_merge!(:schemes => %w(http https))
         options.reverse_merge!(:message => :url)
+        options.reverse_merge!(:add_to => nil)
         super(options)
       end
 
       def validate_each(record, attribute, value)
         schemes = [*options.fetch(:schemes)].map(&:to_s)
+        add_to = options.fetch(:add_to)
         begin
           uri = Addressable::URI.parse(value)
           unless uri && uri.host && schemes.include?(uri.scheme)
-            record.errors.add(attribute, options.fetch(:message), :value => value)
+            record.errors.add(add_to || attribute, options.fetch(:message), :value => value)
           end
         rescue Addressable::URI::InvalidURIError
-          record.errors.add(attribute, options.fetch(:message), :value => value)
+          record.errors.add(add_to || attribute, options.fetch(:message), :value => value)
         end
       end
     end
