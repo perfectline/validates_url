@@ -200,4 +200,16 @@ describe "URL validation" do
       @user.errors[:homepage].should == ["wrong"]
     end
   end
+
+  context "with custom add_to" do
+    before do
+      @user = UserWithCustomAddTo.new
+    end
+
+    it "should use custom add_to" do
+      @user.homepage = "invalid"
+      @user.valid?
+      @user.errors[:base].should == ["wrong"]
+    end
+  end
 end
