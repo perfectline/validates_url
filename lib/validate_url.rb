@@ -1,5 +1,7 @@
 require 'addressable/uri'
 require 'active_model'
+require 'active_support/i18n'
+I18n.load_path << File.dirname(__FILE__) + '/locale/en.yml'
 
 module ActiveModel
   module Validations
@@ -7,7 +9,7 @@ module ActiveModel
 
       def initialize(options)
         options.reverse_merge!(:schemes => %w(http https))
-        options.reverse_merge!(:message => "is not a valid URL")
+        options.reverse_merge!(:message => :url)
         super(options)
       end
 
@@ -15,7 +17,7 @@ module ActiveModel
         schemes = [*options.fetch(:schemes)].map(&:to_s)
         begin
           uri = Addressable::URI.parse(value)
-          unless uri && schemes.include?(uri.scheme)
+          unless uri && uri.host && schemes.include?(uri.scheme)
             record.errors.add(attribute, options.fetch(:message), :value => value)
           end
         rescue Addressable::URI::InvalidURIError

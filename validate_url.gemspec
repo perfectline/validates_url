@@ -21,7 +21,8 @@ Gem::Specification.new do |s|
   s.files = [
     "init.rb",
     "install.rb",
-    "lib/validate_url.rb"
+    "lib/validate_url.rb",
+    "lib/locale/en.yml"
   ]
   s.homepage = "http://github.com/perfectline/validates_url/tree/master"
   s.rubygems_version = "2.2.2"
