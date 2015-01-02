@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'spec_helper'
 
 describe "URL validation" do
@@ -70,6 +71,15 @@ describe "URL validation" do
       @user.homepage = "invalid"
       @user.valid?
       @user.errors[:homepage].should == ["is not a valid URL"]
+    end
+
+    context "when locale is turkish" do
+      it "should return a Turkish default error message" do
+        I18n.locale = :tr
+        @user.homepage = "Black Tea"
+        @user.valid?
+        @user.errors[:homepage].should == ["Geçerli bir URL değil"]
+      end
     end
   end
 
