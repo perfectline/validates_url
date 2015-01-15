@@ -26,6 +26,9 @@ class Pony < ActiveRecord::Base
 
   # with allow_blank
   validates :homepage, :url => {:allow_blank => true}
+
+  # without local hostnames
+  validates :homepage, :url => {:no_local => true}
 end
 ```
 
