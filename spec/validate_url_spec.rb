@@ -135,6 +135,27 @@ describe "URL validation" do
     end
   end
 
+  context "with no_local" do
+    before do
+      @user = UserWithNoLocal.new
+    end
+
+    it "should allow a valid internet url" do
+      @user.homepage = "http://www.example.com"
+      @user.should be_valid
+    end
+
+    it "should not allow a local hostname" do
+      @user.homepage = "http://localhost"
+      @user.should_not be_valid
+    end
+
+    it "should not allow weird urls that get interpreted as local hostnames" do
+      @user.homepage = "http://http://example.com"
+      @user.should_not be_valid
+    end
+  end
+
   context "with legacy syntax" do
     before do
       @user = UserWithLegacySyntax.new
