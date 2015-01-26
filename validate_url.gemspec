@@ -39,15 +39,22 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<activemodel>, [">= 3.0.0"])
+      s.add_runtime_dependency(%q<public_suffix>, [">= 2.0.0"])
       s.add_development_dependency(%q<rspec>, [">= 3.0.0"])
       s.add_development_dependency(%q<diff-lcs>, [">= 1.1.2"])
+      s.add_development_dependency(%q<rake>)
+      s.add_development_dependency(%q<jeweler>)
+      s.add_development_dependency(%q<sqlite3>)
+      s.add_development_dependency(%q<activerecord>)
     else
       s.add_dependency(%q<activemodel>, [">= 3.0.0"])
+      s.add_dependency(%q<public_suffix>, [">= 2.0.0"])
       s.add_dependency(%q<rspec>, [">= 0"])
       s.add_dependency(%q<diff-lcs>, [">= 1.1.2"])
     end
   else
     s.add_dependency(%q<activemodel>, [">= 3.0.0"])
+    s.add_dependency(%q<public_suffix>, [">= 2.0.0"])
     s.add_dependency(%q<rspec>, [">= 0"])
     s.add_dependency(%q<diff-lcs>, [">= 1.1.2"])
   end
