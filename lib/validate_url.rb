@@ -11,6 +11,8 @@ module ActiveModel
       def initialize(options)
         options.reverse_merge!(:schemes => %w(http https))
         options.reverse_merge!(:message => :url)
+        options.reverse_merge!(:no_local => false)
+
         super(options)
       end
 
@@ -18,7 +20,7 @@ module ActiveModel
         schemes = [*options.fetch(:schemes)].map(&:to_s)
         begin
           uri = Addressable::URI.parse(value)
-          unless uri && uri.host && schemes.include?(uri.scheme)
+          unless uri && uri.host && schemes.include?(uri.scheme) && (!options.fetch(:no_local) || uri.host.include?('.'))
             record.errors.add(attribute, options.fetch(:message), :value => value)
           end
         rescue Addressable::URI::InvalidURIError
