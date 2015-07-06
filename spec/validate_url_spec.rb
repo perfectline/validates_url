@@ -56,7 +56,7 @@ describe "URL validation" do
       @user.homepage = "http://"
       @user.should_not be_valid
     end
-    
+
     it "should not allow a url without a host" do
       @user.homepage = "http:/"
       @user.should_not be_valid
@@ -79,6 +79,14 @@ describe "URL validation" do
         @user.homepage = "Black Tea"
         @user.valid?
         @user.errors[:homepage].should == ["Geçerli bir URL değil"]
+      end
+    end
+    context "when locale is Japanese" do
+      it "should return a Japanese default error message" do
+        I18n.locale = :ja
+        @user.homepage = "黒麦茶"
+        @user.valid?
+        @user.errors[:homepage].should == ["は不正なURLです。"]
       end
     end
   end
