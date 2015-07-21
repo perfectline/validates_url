@@ -10,10 +10,10 @@ task :default => :test
 Jeweler::Tasks.new do |jewel|
   jewel.name            = 'validate_url'
   jewel.summary         = 'Library for validating urls in Rails.'
-  jewel.email           = ['tanel.suurhans@perfectline.ee', 'tarmo.lehtpuu@perfectline.ee']
+  jewel.email           = ['tanel.suurhans@perfectline.co', 'tarmo.lehtpuu@perfectline.co', 'vladimir.krylov@perfectline.co']
   jewel.homepage        = 'http://github.com/perfectline/validates_url/tree/master'
   jewel.description     = 'Library for validating urls in Rails.'
-  jewel.authors         = ["Tanel Suurhans", "Tarmo Lehtpuu"]
+  jewel.authors         = ["Tanel Suurhans", "Tarmo Lehtpuu", "Vladimir Krylov"]
   jewel.files           = FileList["lib/**/*.rb", "lib/locale/*.yml", "*.rb", "MIT-LICENCE", "README.markdown"]
 
   jewel.add_dependency 'activemodel', '>= 3.0.0'

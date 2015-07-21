@@ -10,10 +10,10 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
-  s.authors = ["Tanel Suurhans", "Tarmo Lehtpuu"]
-  s.date = "2014-11-13"
+  s.authors = ["Tanel Suurhans", "Tarmo Lehtpuu", "Vladimir Krylov"]
+  s.date = "2015-07-21"
   s.description = "Library for validating urls in Rails."
-  s.email = ["tanel.suurhans@perfectline.ee", "tarmo.lehtpuu@perfectline.ee"]
+  s.email = ["tanel.suurhans@perfectline.co", "tarmo.lehtpuu@perfectline.co", "vladimir.krylov@perfectline.co"]
   s.extra_rdoc_files = [
     "LICENSE.md",
     "README.md"
@@ -21,12 +21,16 @@ Gem::Specification.new do |s|
   s.files = [
     "init.rb",
     "install.rb",
+    "lib/locale/de.yml",
     "lib/locale/en.yml",
     "lib/locale/it.yml",
+    "lib/locale/ja.yml",
+    "lib/locale/pt-BR.yml",
+    "lib/locale/tr.yml",
     "lib/validate_url.rb"
   ]
   s.homepage = "http://github.com/perfectline/validates_url/tree/master"
-  s.rubygems_version = "2.2.2"
+  s.rubygems_version = "2.4.5"
   s.summary = "Library for validating urls in Rails."
 
   if s.respond_to? :specification_version then
