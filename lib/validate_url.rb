@@ -3,6 +3,7 @@ require 'active_model'
 require 'active_support/i18n'
 I18n.load_path << File.dirname(__FILE__) + '/locale/en.yml'
 I18n.load_path << File.dirname(__FILE__) + '/locale/tr.yml'
+I18n.load_path << File.dirname(__FILE__) + '/locale/fr.yml'
 
 module ActiveModel
   module Validations
