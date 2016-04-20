@@ -158,6 +158,11 @@ describe "URL validation" do
       expect(@user).not_to be_valid
     end
 
+    it "should not allow a local ip" do
+      @user.homepage = "http://127.0.0.1"
+      @user.should_not be_valid
+    end
+
     it "should not allow weird urls that get interpreted as local hostnames" do
       @user.homepage = "http://http://example.com"
       expect(@user).not_to be_valid

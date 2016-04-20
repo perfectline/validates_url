@@ -19,12 +19,20 @@ module ActiveModel
         schemes = [*options.fetch(:schemes)].map(&:to_s)
         begin
           uri = Addressable::URI.parse(value)
-          unless uri && uri.host && schemes.include?(uri.scheme) && (!options.fetch(:no_local) || uri.host.include?('.'))
+          unless uri && uri.host && schemes.include?(uri.scheme) && (!options.fetch(:no_local) || not_localhost?(uri.host))
             record.errors.add(attribute, options.fetch(:message), :value => value)
           end
         rescue Addressable::URI::InvalidURIError
           record.errors.add(attribute, options.fetch(:message), :value => value)
         end
+      end
+
+      private
+
+      def not_localhost?(host)
+        return false if host == '127.0.0.1'
+
+        host.include?('.')
       end
     end
 
