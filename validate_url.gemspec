@@ -13,6 +13,7 @@ Gem::Specification.new do |s|
   s.authors = ["Tanel Suurhans", "Tarmo Lehtpuu", "Vladimir Krylov"]
   s.date = "2015-07-21"
   s.description = "Library for validating urls in Rails."
+  s.license = 'MIT'
   s.email = ["tanel.suurhans@perfectline.co", "tarmo.lehtpuu@perfectline.co", "vladimir.krylov@perfectline.co"]
   s.extra_rdoc_files = [
     "LICENSE.md",
