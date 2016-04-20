@@ -24,53 +24,53 @@ describe "URL validation" do
 
     it "should not allow nil as url" do
       @user.homepage = nil
-      @user.should_not be_valid
+      expect(@user).not_to be_valid
     end
 
     it "should not allow blank as url" do
       @user.homepage = ""
-      @user.should_not be_valid
+      expect(@user).not_to be_valid
     end
 
     it "should not allow an url without scheme" do
       @user.homepage = "www.example.com"
-      @user.should_not be_valid
+      expect(@user).not_to be_valid
     end
 
     it "should allow an url with http" do
       @user.homepage = "http://localhost"
-      @user.should be_valid
+      expect(@user).to be_valid
     end
 
     it "should allow an url with https" do
       @user.homepage = "https://localhost"
-      @user.should be_valid
+      expect(@user).to be_valid
     end
 
     it "should not allow a url with an invalid scheme" do
       @user.homepage = "ftp://localhost"
-      @user.should_not be_valid
+      expect(@user).not_to be_valid
     end
 
     it "should not allow a url with only a scheme" do
       @user.homepage = "http://"
-      @user.should_not be_valid
+      expect(@user).not_to be_valid
     end
 
     it "should not allow a url without a host" do
       @user.homepage = "http:/"
-      @user.should_not be_valid
+      expect(@user).not_to be_valid
     end
 
     it "should allow a url with an underscore" do
       @user.homepage = "http://foo_bar.com"
-      @user.should be_valid
+      expect(@user).to be_valid
     end
 
     it "should return a default error message" do
       @user.homepage = "invalid"
       @user.valid?
-      @user.errors[:homepage].should == ["is not a valid URL"]
+      expect(@user.errors[:homepage]).to eq(["is not a valid URL"])
     end
 
     context "when locale is turkish" do
@@ -78,7 +78,7 @@ describe "URL validation" do
         I18n.locale = :tr
         @user.homepage = "Black Tea"
         @user.valid?
-        @user.errors[:homepage].should == ["Geçerli bir URL değil"]
+        expect(@user.errors[:homepage]).to eq(["Geçerli bir URL değil"])
       end
     end
     context "when locale is Japanese" do
@@ -86,7 +86,7 @@ describe "URL validation" do
         I18n.locale = :ja
         @user.homepage = "黒麦茶"
         @user.valid?
-        @user.errors[:homepage].should == ["は不正なURLです。"]
+        expect(@user.errors[:homepage]).to eq(["は不正なURLです。"])
       end
     end
   end
@@ -98,22 +98,22 @@ describe "URL validation" do
 
     it "should allow nil as url" do
       @user.homepage = nil
-      @user.should be_valid
+      expect(@user).to be_valid
     end
 
     it "should not allow blank as url" do
       @user.homepage = ""
-      @user.should_not be_valid
+      expect(@user).not_to be_valid
     end
 
     it "should allow a valid url" do
       @user.homepage = "http://www.example.com"
-      @user.should be_valid
+      expect(@user).to be_valid
     end
 
     it "should allow a url with an underscore" do
       @user.homepage = "http://foo_bar.com"
-      @user.should be_valid
+      expect(@user).to be_valid
     end
   end
 
@@ -124,22 +124,22 @@ describe "URL validation" do
 
     it "should allow nil as url" do
       @user.homepage = nil
-      @user.should be_valid
+      expect(@user).to be_valid
     end
 
     it "should allow blank as url" do
       @user.homepage = ""
-      @user.should be_valid
+      expect(@user).to be_valid
     end
 
     it "should allow a valid url" do
       @user.homepage = "http://www.example.com"
-      @user.should be_valid
+      expect(@user).to be_valid
     end
 
     it "should allow a url with an underscore" do
       @user.homepage = "http://foo_bar.com"
-      @user.should be_valid
+      expect(@user).to be_valid
     end
   end
 
@@ -150,17 +150,17 @@ describe "URL validation" do
 
     it "should allow a valid internet url" do
       @user.homepage = "http://www.example.com"
-      @user.should be_valid
+      expect(@user).to be_valid
     end
 
     it "should not allow a local hostname" do
       @user.homepage = "http://localhost"
-      @user.should_not be_valid
+      expect(@user).not_to be_valid
     end
 
     it "should not allow weird urls that get interpreted as local hostnames" do
       @user.homepage = "http://http://example.com"
-      @user.should_not be_valid
+      expect(@user).not_to be_valid
     end
   end
 
@@ -171,27 +171,27 @@ describe "URL validation" do
 
     it "should allow nil as url" do
       @user.homepage = nil
-      @user.should be_valid
+      expect(@user).to be_valid
     end
 
     it "should allow blank as url" do
       @user.homepage = ""
-      @user.should be_valid
+      expect(@user).to be_valid
     end
 
     it "should allow a valid url" do
       @user.homepage = "http://www.example.com"
-      @user.should be_valid
+      expect(@user).to be_valid
     end
 
     it "should not allow invalid url" do
       @user.homepage = "random"
-      @user.should_not be_valid
+      expect(@user).not_to be_valid
     end
 
     it "should allow a url with an underscore" do
       @user.homepage = "http://foo_bar.com"
-      @user.should be_valid
+      expect(@user).to be_valid
     end
   end
 
@@ -202,7 +202,7 @@ describe "URL validation" do
 
     it "should not allow invalid url" do
       @user.homepage = "random"
-      @user.should_not be_valid
+      expect(@user).not_to be_valid
     end
   end
 
@@ -213,7 +213,7 @@ describe "URL validation" do
 
     it "should not allow invalid url" do
       @user.homepage = "random"
-      @user.should_not be_valid
+      expect(@user).not_to be_valid
     end
   end
 
@@ -224,7 +224,7 @@ describe "URL validation" do
 
     it "should allow alternative URI schemes" do
       @user.homepage = "ftp://ftp.example.com"
-      @user.should be_valid
+      expect(@user).to be_valid
     end
   end
 
@@ -236,7 +236,7 @@ describe "URL validation" do
     it "should use custom message" do
       @user.homepage = "invalid"
       @user.valid?
-      @user.errors[:homepage].should == ["wrong"]
+      expect(@user.errors[:homepage]).to eq(["wrong"])
     end
   end
 end
