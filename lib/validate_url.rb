@@ -1,12 +1,7 @@
 require 'addressable/uri'
 require 'active_model'
 require 'active_support/i18n'
-I18n.load_path << File.dirname(__FILE__) + '/locale/en.yml'
-I18n.load_path << File.dirname(__FILE__) + '/locale/ru.yml'
-I18n.load_path << File.dirname(__FILE__) + '/locale/km.yml'
-I18n.load_path << File.dirname(__FILE__) + '/locale/tr.yml'
-I18n.load_path << File.dirname(__FILE__) + '/locale/fr.yml'
-I18n.load_path << File.dirname(__FILE__) + '/locale/ja.yml'
+I18n.load_path += Dir[File.dirname(__FILE__) + "/locale/*.yml"]
 
 module ActiveModel
   module Validations
@@ -25,10 +20,10 @@ module ActiveModel
         begin
           uri = Addressable::URI.parse(value)
           unless uri && uri.host && schemes.include?(uri.scheme) && (!options.fetch(:no_local) || uri.host.include?('.'))
-            record.errors.add(attribute, options.fetch(:message), :value => value)
+            record.errors.add(attribute, options.fetch(:message) % {:value => value})
           end
         rescue Addressable::URI::InvalidURIError
-          record.errors.add(attribute, options.fetch(:message), :value => value)
+          record.errors.add(attribute, options.fetch(:message) % {:value => value})
         end
       end
     end

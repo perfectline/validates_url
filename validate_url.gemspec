@@ -13,6 +13,7 @@ Gem::Specification.new do |s|
   s.authors = ["Tanel Suurhans", "Tarmo Lehtpuu", "Vladimir Krylov"]
   s.date = "2015-07-21"
   s.description = "Library for validating urls in Rails."
+  s.license = 'MIT'
   s.email = ["tanel.suurhans@perfectline.co", "tarmo.lehtpuu@perfectline.co", "vladimir.krylov@perfectline.co"]
   s.extra_rdoc_files = [
     "LICENSE.md",
@@ -39,7 +40,7 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<activemodel>, [">= 3.0.0"])
       s.add_runtime_dependency(%q<addressable>, [">= 0"])
-      s.add_development_dependency(%q<rspec>, [">= 0"])
+      s.add_development_dependency(%q<rspec>, [">= 3.0.0"])
       s.add_development_dependency(%q<diff-lcs>, [">= 1.1.2"])
     else
       s.add_dependency(%q<activemodel>, [">= 3.0.0"])
