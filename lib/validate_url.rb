@@ -6,6 +6,7 @@ I18n.load_path += Dir[File.dirname(__FILE__) + "/locale/*.yml"]
 module ActiveModel
   module Validations
     class UrlValidator < ActiveModel::EachValidator
+      RESERVED_OPTIONS = [:schemes, :no_local]
 
       def initialize(options)
         options.reverse_merge!(:schemes => %w(http https))
@@ -20,11 +21,19 @@ module ActiveModel
         begin
           uri = Addressable::URI.parse(value)
           unless uri && uri.host && schemes.include?(uri.scheme) && (!options.fetch(:no_local) || uri.host.include?('.'))
-            record.errors.add(attribute, options.fetch(:message) % {:value => value})
+            record.errors.add(attribute, :url, filtered_options(value))
           end
         rescue Addressable::URI::InvalidURIError
-          record.errors.add(attribute, options.fetch(:message) % {:value => value})
+          record.errors.add(attribute, :url, filtered_options(value))
         end
+      end
+
+      protected
+
+      def filtered_options(value)
+        filtered = options.except(*RESERVED_OPTIONS)
+        filtered[:value] = value
+        filtered
       end
     end
 
