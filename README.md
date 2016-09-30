@@ -47,7 +47,7 @@ end
 
 ### I18n
 
-The default error message `is not valid url`.
+The default error message `is not a valid URL`.
 You can pass the `:message => "my custom error"` option to your validation to define your own, custom message.
 
 
