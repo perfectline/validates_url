@@ -47,6 +47,11 @@ describe "URL validation" do
       expect(@user).to be_valid
     end
 
+    it "should disregard case on url scheme" do
+      @user.homepage = "HTTP://localhost"
+      expect(@user).to be_valid
+    end
+
     it "should not allow a url with an invalid scheme" do
       @user.homepage = "ftp://localhost"
       expect(@user).not_to be_valid
