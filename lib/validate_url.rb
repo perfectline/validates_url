@@ -1,4 +1,3 @@
-require 'addressable/uri'
 require 'active_model'
 require 'active_support/i18n'
 I18n.load_path += Dir[File.dirname(__FILE__) + "/locale/*.yml"]
@@ -19,11 +18,11 @@ module ActiveModel
       def validate_each(record, attribute, value)
         schemes = [*options.fetch(:schemes)].map(&:to_s)
         begin
-          uri = Addressable::URI.parse(value)
+          uri = URI.parse(value)
           unless uri && uri.host && schemes.include?(uri.scheme) && (!options.fetch(:no_local) || uri.host.include?('.'))
             record.errors.add(attribute, :url, filtered_options(value))
           end
-        rescue Addressable::URI::InvalidURIError
+        rescue URI::InvalidURIError
           record.errors.add(attribute, :url, filtered_options(value))
         end
       end
