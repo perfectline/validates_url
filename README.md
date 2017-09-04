@@ -29,6 +29,9 @@ class Pony < ActiveRecord::Base
 
   # without local hostnames
   validates :homepage, :url => {:no_local => true}
+
+  # with custom schemes
+  validates :homepage, :url => {:schemes => ['https']}
 end
 ```
 
