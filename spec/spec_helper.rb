@@ -16,12 +16,13 @@ ActiveRecord::Base.establish_connection(
 
 require File.join(File.dirname(__FILE__), '..', 'init')
 
-autoload :User,                  'resources/user'
-autoload :UserWithNil,           'resources/user_with_nil'
-autoload :UserWithBlank,         'resources/user_with_blank'
-autoload :UserWithLegacySyntax,  'resources/user_with_legacy_syntax'
-autoload :UserWithAr,            'resources/user_with_ar'
-autoload :UserWithArLegacy,      'resources/user_with_ar_legacy'
-autoload :UserWithCustomScheme,  'resources/user_with_custom_scheme'
-autoload :UserWithCustomMessage, 'resources/user_with_custom_message'
-autoload :UserWithNoLocal,       'resources/user_with_no_local'
+autoload :User,                       'resources/user'
+autoload :UserWithNil,                'resources/user_with_nil'
+autoload :UserWithBlank,              'resources/user_with_blank'
+autoload :UserWithLegacySyntax,       'resources/user_with_legacy_syntax'
+autoload :UserWithAr,                 'resources/user_with_ar'
+autoload :UserWithArLegacy,           'resources/user_with_ar_legacy'
+autoload :UserWithCustomScheme,       'resources/user_with_custom_scheme'
+autoload :UserWithCustomMessage,      'resources/user_with_custom_message'
+autoload :UserWithNoLocal,            'resources/user_with_no_local'
+autoload :UserWithBlacklistedDomains, 'resources/user_with_blacklisted_domains'
