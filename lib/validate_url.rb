@@ -1,11 +1,27 @@
 require 'active_model'
 require 'active_support/i18n'
+require 'ipaddr'
+require 'resolv'
 I18n.load_path += Dir[File.dirname(__FILE__) + "/locale/*.yml"]
 
 module ActiveModel
   module Validations
     class UrlValidator < ActiveModel::EachValidator
       RESERVED_OPTIONS = [:schemes, :no_local]
+
+      BLACKLISTED_INTERNAL_IPS = [
+        IPAddr.new('10.0.0.0/8'),
+        IPAddr.new('127.0.0.0/8'),
+        IPAddr.new('192.168.0.0/16'),
+        IPAddr.new('169.254.0.0/16'),
+        IPAddr.new('224.0.0.0/4'),
+        IPAddr.new('0.0.0.0/8'),
+        IPAddr.new('255.255.255.255'),
+        IPAddr.new('::1'),
+        IPAddr.new('fc00::/7'),
+        IPAddr.new('fd00::/8'),
+        IPAddr.new('fe80::/10')
+      ].freeze
 
       def initialize(options)
         options.reverse_merge!(:schemes => %w(http https))
@@ -19,11 +35,37 @@ module ActiveModel
         schemes = [*options.fetch(:schemes)].map(&:to_s)
         begin
           uri = URI.parse(value)
-          unless uri && uri.host && schemes.include?(uri.scheme) && (!options.fetch(:no_local) || uri.host.include?('.'))
+          hostname = uri.host || uri.to_s
+
+          unless uri && uri.host && schemes.include?(uri.scheme)
             record.errors.add(attribute, :url, filtered_options(value))
+            return
+          end
+
+          if options.fetch(:no_local) && self.class.local?(hostname)
+            record.errors.add(attribute, :url, filtered_options(value))
+            return
           end
         rescue URI::InvalidURIError
           record.errors.add(attribute, :url, filtered_options(value))
+        end
+      end
+
+      def self.local?(hostname)
+        ip = begin
+               Resolv.getaddress(hostname)
+             rescue Resolv::ResolvError
+               nil
+             end
+
+        return false unless ip
+
+        ip_addr = IPAddr.new(ip)
+
+        BLACKLISTED_INTERNAL_IPS.any? do |blacklisted_ip|
+          # note 1: explicit usage of triple equals operator
+          # note 2: a === b is not equal to b === a when dealing with IPAddr
+          blacklisted_ip === ip_addr
         end
       end
 

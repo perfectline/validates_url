@@ -158,9 +158,20 @@ describe "URL validation" do
       expect(@user).not_to be_valid
     end
 
-    it "should not allow weird urls that get interpreted as local hostnames" do
-      @user.homepage = "http://http://example.com"
-      expect(@user).not_to be_valid
+    [
+      'https://127.0.0.1',
+      'https://192.168.1.13',
+      'https://127.0.254.254',
+      'https://10.100.103.243',
+      'https://127.0.0.1:5555',
+      'https://127.0.0.1.xip.io',
+      'https://169.254.1.1',
+      'https://0:0:0:0:0:ffff:7f00:1'
+    ].each do |url|
+      it "should not allow #{url}" do
+        @user.homepage = url
+        expect(@user).not_to be_valid
+      end
     end
   end
 
