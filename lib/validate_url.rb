@@ -7,7 +7,7 @@ I18n.load_path += Dir[File.dirname(__FILE__) + "/locale/*.yml"]
 module ActiveModel
   module Validations
     class UrlValidator < ActiveModel::EachValidator
-      RESERVED_OPTIONS = [:schemes, :no_local]
+      RESERVED_OPTIONS = [:schemes, :no_local, :blacklisted_domains]
 
       BLACKLISTED_INTERNAL_IPS = [
         IPAddr.new('10.0.0.0/8'),
@@ -27,6 +27,7 @@ module ActiveModel
         options.reverse_merge!(:schemes => %w(http https))
         options.reverse_merge!(:message => :url)
         options.reverse_merge!(:no_local => false)
+        options.reverse_merge!(:blacklisted_domains => [])
 
         super(options)
       end
@@ -46,9 +47,25 @@ module ActiveModel
             record.errors.add(attribute, :url, filtered_options(value))
             return
           end
+
+          if options.fetch(:blacklisted_domains).any? && blacklisted_domain?(hostname)
+            record.errors.add(attribute, :url, filtered_options(value))
+            return
+          end
         rescue URI::InvalidURIError
           record.errors.add(attribute, :url, filtered_options(value))
         end
+      end
+
+      def blacklisted_domain?(hostname)
+        blacklisted_domains_regex = Regexp.new(
+          options[:blacklisted_domains].map do |blacklisted_domain|
+            %r{^([\w-]+\.)?#{Regexp.escape(blacklisted_domain)}}
+          end.join('|'),
+          Regexp::IGNORECASE
+        )
+
+        (hostname =~ blacklisted_domains_regex).present?
       end
 
       def self.local?(hostname)

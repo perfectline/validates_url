@@ -175,6 +175,27 @@ describe "URL validation" do
     end
   end
 
+  context "with blacklisted_domains" do
+    before do
+      @user = UserWithBlacklistedDomains.new
+    end
+
+    it "should allow a valid internet url" do
+      @user.homepage = "http://www.example.com"
+      expect(@user).to be_valid
+    end
+
+    it "should not allow a blacklisted domain" do
+      @user.homepage = "http://example.net"
+      expect(@user).not_to be_valid
+    end
+
+    it "should not allow a blacklisted subdomain" do
+      @user.homepage = "http://sub.example.net"
+      expect(@user).not_to be_valid
+    end
+  end
+
   context "with legacy syntax" do
     before do
       @user = UserWithLegacySyntax.new
