@@ -5,5 +5,5 @@ class UserWithNil
 
   attr_accessor :homepage
 
-  validates :homepage, :url => {:allow_nil => true}
+  validates :homepage, url: { allow_nil: true }
 end

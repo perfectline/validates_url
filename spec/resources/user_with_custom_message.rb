@@ -3,5 +3,5 @@ class UserWithCustomMessage
 
   attr_accessor :homepage
 
-  validates :homepage, :url => {message: "wrong"}
+  validates :homepage, url: { message: "wrong" }
 end

@@ -8,9 +8,9 @@ module ActiveModel
       RESERVED_OPTIONS = [:schemes, :no_local]
 
       def initialize(options)
-        options.reverse_merge!(:schemes => %w(http https))
-        options.reverse_merge!(:message => :url)
-        options.reverse_merge!(:no_local => false)
+        options.reverse_merge!(schemes: %w(http https))
+        options.reverse_merge!(message: :url)
+        options.reverse_merge!(no_local: false)
 
         super(options)
       end
@@ -42,8 +42,8 @@ module ActiveModel
       #   class Unicorn
       #     include ActiveModel::Validations
       #     attr_accessor :homepage, :ftpsite
-      #     validates_url :homepage, :allow_blank => true
-      #     validates_url :ftpsite, :schemes => ['ftp']
+      #     validates_url :homepage, allow_blank: true
+      #     validates_url :ftpsite, schemes: ['ftp']
       #   end
       # Configuration options:
       # * <tt>:message</tt> - A custom error message (default is: "is not a valid URL").

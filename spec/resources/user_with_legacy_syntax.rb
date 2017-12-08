@@ -5,5 +5,5 @@ class UserWithLegacySyntax
 
   attr_accessor :homepage
 
-  validates_url :homepage, :allow_blank => true
+  validates_url :homepage, allow_blank: true
 end
