@@ -5,5 +5,5 @@ class UserWithBlank
 
   attr_accessor :homepage
 
-  validates :homepage, :url => {:allow_blank => true}
+  validates :homepage, url: { allow_blank: true }
 end

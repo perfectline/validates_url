@@ -1,9 +1,9 @@
 # Validates URL
 
-This gem adds the capability of validating URLs to ActiveRecord and ActiveModel (Rails 3).
+This gem adds the capability of validating URLs to ActiveRecord and ActiveModel.
 
 ## Installation
-    
+
 ```    
 # add this to your Gemfile
 gem "validate_url"
@@ -19,19 +19,19 @@ sudo gem install validate_url
 ```ruby    
 class Pony < ActiveRecord::Base
   # standard validation
-  validates :homepage, :url => true
+  validates :homepage, url: true
 
   # with allow_nil
-  validates :homepage, :url => {:allow_nil => true}
+  validates :homepage, url: { allow_nil: true }
 
   # with allow_blank
-  validates :homepage, :url => {:allow_blank => true}
+  validates :homepage, url: { allow_blank: true }
 
   # without local hostnames
-  validates :homepage, :url => {:no_local => true}
+  validates :homepage, url: { no_local: true }
 
   # with custom schemes
-  validates :homepage, :url => {:schemes => ['https']}
+  validates :homepage, url: { schemes: ['https'] }
 end
 ```
 
@@ -44,14 +44,14 @@ class Unicorn
   attr_accessor :homepage
 
   # with legacy syntax (the syntax above works also)
-  validates_url :homepage, :allow_blank => true
+  validates_url :homepage, allow_blank: true
 end
 ```
 
 ### I18n
 
 The default error message `is not a valid URL`.
-You can pass the `:message => "my custom error"` option to your validation to define your own, custom message.
+You can pass the `message: "my custom error"` option to your validation to define your own, custom message.
 
 
 ## Contributing

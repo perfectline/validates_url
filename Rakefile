@@ -5,7 +5,7 @@ require 'rspec/core/rake_task'
 require 'jeweler'
 
 desc 'Default: run unit tests.'
-task :default => :test
+task default: :test
 
 Jeweler::Tasks.new do |jewel|
   jewel.name            = 'validate_url'

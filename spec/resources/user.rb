@@ -3,5 +3,5 @@ class User
 
   attr_accessor :homepage
 
-  validates :homepage, :url => true
+  validates :homepage, url: true
 end

@@ -5,5 +5,5 @@ class UserWithNoLocal
 
   attr_accessor :homepage
 
-  validates :homepage, :url => {:no_local => true}
+  validates :homepage, url: { no_local: true }
 end
