@@ -3,5 +3,5 @@ class UserWithCustomScheme
 
   attr_accessor :homepage
 
-  validates :homepage, url { schemes: ['ftp'] }
+  validates :homepage, url: { schemes: ['ftp'] }
 end
