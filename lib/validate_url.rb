@@ -1,5 +1,6 @@
 require 'active_model'
 require 'active_support/i18n'
+require 'public_suffix'
 I18n.load_path += Dir[File.dirname(__FILE__) + "/locale/*.yml"]
 
 module ActiveModel
@@ -11,6 +12,7 @@ module ActiveModel
         options.reverse_merge!(schemes: %w(http https))
         options.reverse_merge!(message: :url)
         options.reverse_merge!(no_local: false)
+        options.reverse_merge!(public_suffix: false)
 
         super(options)
       end
@@ -19,8 +21,10 @@ module ActiveModel
         schemes = [*options.fetch(:schemes)].map(&:to_s)
         begin
           uri = URI.parse(value)
-          unless uri && uri.host && schemes.include?(uri.scheme) && (!options.fetch(:no_local) || uri.host.include?('.'))
-            record.errors.add(attribute, :url, filtered_options(value))
+          validate_suffix = !options.fetch(:public_suffix) || (uri && uri.host && PublicSuffix.valid?(uri.host, :default_rule => nil))
+          validate_no_local = !options.fetch(:no_local) || uri.host.include?('.')
+          unless uri && uri.host && schemes.include?(uri.scheme) && validate_no_local && validate_suffix
+            record.errors.add(attribute, options.fetch(:message), value: value)
           end
         rescue URI::InvalidURIError
           record.errors.add(attribute, :url, filtered_options(value))

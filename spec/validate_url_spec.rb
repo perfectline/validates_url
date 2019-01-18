@@ -163,6 +163,27 @@ describe "URL validation" do
     end
   end
 
+  context "with public_suffix" do
+    before do
+      @user = UserWithPublicSuffix.new
+    end
+
+    it "should allow a valid public suffix" do
+      @user.homepage = "http://www.example.com"
+      expect(@user).to be_valid
+    end
+
+    it "should not allow a local hostname" do
+      @user.homepage = "http://localhost"
+      expect(@user).not_to be_valid
+    end
+
+    it "should not allow non public hosts suffixes" do
+      @user.homepage = "http://example.not_a_valid_tld"
+      expect(@user).not_to be_valid
+    end
+  end
+
   context "with legacy syntax" do
     before do
       @user = UserWithLegacySyntax.new

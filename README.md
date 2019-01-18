@@ -4,7 +4,7 @@ This gem adds the capability of validating URLs to ActiveRecord and ActiveModel.
 
 ## Installation
 
-```    
+```
 # add this to your Gemfile
 gem "validate_url"
 
@@ -16,7 +16,7 @@ sudo gem install validate_url
 
 ### With ActiveRecord
 
-```ruby    
+```ruby
 class Pony < ActiveRecord::Base
   # standard validation
   validates :homepage, url: true
@@ -32,6 +32,9 @@ class Pony < ActiveRecord::Base
 
   # with custom schemes
   validates :homepage, url: { schemes: ['https'] }
+
+  # with public suffix database https://publicsuffix.org/
+  validates :homepage, url: { public_suffix: true }
 end
 ```
 
