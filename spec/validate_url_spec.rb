@@ -161,6 +161,11 @@ describe "URL validation" do
       @user.homepage = "http://http://example.com"
       expect(@user).not_to be_valid
     end
+
+    it "does not allow an url without scheme" do
+      @user.homepage = "www.example.com"
+      expect(@user).not_to be_valid
+    end
   end
 
   context "with public_suffix" do
