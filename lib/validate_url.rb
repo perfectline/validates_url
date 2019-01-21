@@ -21,9 +21,14 @@ module ActiveModel
         schemes = [*options.fetch(:schemes)].map(&:to_s)
         begin
           uri = URI.parse(value)
-          validate_suffix = !options.fetch(:public_suffix) || (uri && uri.host && PublicSuffix.valid?(uri.host, :default_rule => nil))
-          validate_no_local = !options.fetch(:no_local) || uri.host.include?('.')
-          unless uri && uri.host && schemes.include?(uri.scheme) && validate_no_local && validate_suffix
+          host = uri && uri.host
+          scheme = uri && uri.scheme
+
+          valid_suffix = !options.fetch(:public_suffix) || (host && PublicSuffix.valid?(host, :default_rule => nil))
+          valid_no_local = !options.fetch(:no_local) || (host && host.include?('.'))
+          valid_scheme = host && scheme && schemes.include?(scheme)
+
+          unless valid_scheme && valid_no_local && valid_suffix
             record.errors.add(attribute, options.fetch(:message), value: value)
           end
         rescue URI::InvalidURIError
