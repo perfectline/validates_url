@@ -20,7 +20,7 @@ module ActiveModel
       def validate_each(record, attribute, value)
         schemes = [*options.fetch(:schemes)].map(&:to_s)
         begin
-          uri = URI.parse(value)
+          uri = URI.parse(URI.escape(value))
           host = uri && uri.host
           scheme = uri && uri.scheme
 
