@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Tanel Suurhans", "Tarmo Lehtpuu", "Vladimir Krylov"]
-  s.date = "2019-03-01"
+  s.date = "2019-03-12"
   s.description = "Library for validating urls in Rails."
   s.email = ["tanel.suurhans@perfectline.co", "tarmo.lehtpuu@perfectline.co", "vladimir.krylov@perfectline.co"]
   s.extra_rdoc_files = [
@@ -48,6 +48,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<sqlite3>, [">= 0"])
       s.add_development_dependency(%q<activerecord>, [">= 0"])
       s.add_runtime_dependency(%q<activemodel>, [">= 3.0.0"])
+      s.add_runtime_dependency(%q<public_suffix>, [">= 0"])
       s.add_development_dependency(%q<rspec>, [">= 0"])
       s.add_development_dependency(%q<diff-lcs>, [">= 1.1.2"])
     else
@@ -55,6 +56,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<sqlite3>, [">= 0"])
       s.add_dependency(%q<activerecord>, [">= 0"])
       s.add_dependency(%q<activemodel>, [">= 3.0.0"])
+      s.add_dependency(%q<public_suffix>, [">= 0"])
       s.add_dependency(%q<rspec>, [">= 0"])
       s.add_dependency(%q<diff-lcs>, [">= 1.1.2"])
     end
@@ -63,6 +65,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<sqlite3>, [">= 0"])
     s.add_dependency(%q<activerecord>, [">= 0"])
     s.add_dependency(%q<activemodel>, [">= 3.0.0"])
+    s.add_dependency(%q<public_suffix>, [">= 0"])
     s.add_dependency(%q<rspec>, [">= 0"])
     s.add_dependency(%q<diff-lcs>, [">= 1.1.2"])
   end
