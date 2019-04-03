@@ -70,3 +70,15 @@ Validates URL is created and maintained by [PerfectLine](http://www.perfectline.
 
 Validates URL is Copyright © 2010-2014 [PerfectLine](http://www.perfectline.co), LLC. It is free software, and may be
 redistributed under the terms specified in the LICENSE file.
+
+## How to push new version
+
+```
+rake version:bump:patch
+rake gemspec
+```
+Fix validate_url.gemspec to remove unneeded wrong strings
+```
+gem build validate_url.gemspec
+gem push validate_url-1.0.8.gem
+```
