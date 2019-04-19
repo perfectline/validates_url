@@ -1,8 +1,6 @@
 require "spec_helper"
 
 if defined?(ActiveModel)
-  require_relative "../lib/rspec_matcher"
-
   describe "RSpec matcher" do
     subject { User }
 
