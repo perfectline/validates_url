@@ -7,6 +7,7 @@ require 'sqlite3'
 require 'active_record'
 require 'active_record/base'
 require 'active_record/migration'
+require 'validate_url/rspec_matcher'
 
 ActiveRecord::Migration.verbose = false
 ActiveRecord::Base.establish_connection(

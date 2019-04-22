@@ -51,6 +51,22 @@ class Unicorn
 end
 ```
 
+### With RSpec
+
+Require the matcher in `spec_helper.rb` or `rails_helper.rb`:
+
+```ruby
+require 'validate_url/rspec_matcher'
+```
+
+In your spec:
+
+```ruby
+describe Unicorn
+  it { is_expected.to validate_url_of(:homepage) }
+end
+```
+
 ### I18n
 
 The default error message `is not a valid URL`.
