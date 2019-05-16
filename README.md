@@ -8,7 +8,7 @@ This gem adds the capability of validating URLs to ActiveRecord and ActiveModel.
 # add this to your Gemfile
 gem "validate_url"
 
-# and  run
+# or run
 sudo gem install validate_url
 ```
 
