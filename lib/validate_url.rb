@@ -2,6 +2,10 @@ require 'active_model'
 require 'active_support/i18n'
 require 'ipaddr'
 require 'resolv'
+
+require_relative 'aws/sns/uri'
+require_relative 'aws/sns/sns_uri_validator'
+
 I18n.load_path += Dir[File.dirname(__FILE__) + "/locale/*.yml"]
 
 module ActiveModel
