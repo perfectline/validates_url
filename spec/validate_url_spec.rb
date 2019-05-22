@@ -271,4 +271,20 @@ describe "URL validation" do
       expect(@user.errors[:homepage]).to eq(["wrong"])
     end
   end
+
+  context "with SNS" do
+    before do
+      @user = UserWithArAndSns.new
+    end
+
+    it "should allow a valid sns uri" do
+      @user.homepage = "sns://AKIAIOSFODNN7EXAMPLE:wJalrXUtnFEMI%2FK7MDENG%2FbPxRfiCYEXAMPLEKEY@us-east-2/478320183963/checkr-webhooks"
+      expect(@user).not_to be_valid
+    end
+
+    it "should not allow invalid sns uri with colons used instead of slashes" do
+      @user.homepage = "sns://AKIAIOSFODNN7EXAMPLE:wJalrXUtnFEMI%2FK7MDENG%2FbPxRfiCYEXAMPLEKEY@us-east-2:478320183963:checkr-webhooks"
+      expect(@user).not_to be_valid
+    end
+  end
 end
