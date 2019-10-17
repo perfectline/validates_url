@@ -66,6 +66,11 @@ describe "URL validation" do
       expect(@user).to be_valid
     end
 
+    it "does not allow a url with a space in the hostname" do
+      @user.homepage = "http://foo bar.com"
+      expect(@user).not_to be_valid
+    end
+
     it "returns a default error message" do
       @user.homepage = "invalid"
       @user.valid?
