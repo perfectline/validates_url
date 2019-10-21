@@ -71,6 +71,11 @@ describe "URL validation" do
       expect(@user).not_to be_valid
     end
 
+    it "does not allow a url with a space in the querystring" do
+      @user.homepage = "http://example.com/some/? doodads=ok"
+      expect(@user).not_to be_valid
+    end
+
     it "returns a default error message" do
       @user.homepage = "invalid"
       @user.valid?
