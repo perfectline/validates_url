@@ -4,11 +4,15 @@ This gem adds the capability of validating URLs to ActiveRecord and ActiveModel.
 
 ## Installation
 
-```
-# add this to your Gemfile
-gem "validate_url"
+Add this to your `Gemfile`:
 
-# or run
+```ruby
+gem "validate_url"
+```
+
+Or install it yourself:
+
+```sh
 sudo gem install validate_url
 ```
 
@@ -62,7 +66,7 @@ require 'validate_url/rspec_matcher'
 In your spec:
 
 ```ruby
-describe Unicorn
+RSpec.describe Unicorn
   it { is_expected.to validate_url_of(:homepage) }
 end
 ```
@@ -87,14 +91,16 @@ Validates URL is created and maintained by [PerfectLine](http://www.perfectline.
 Validates URL is Copyright © 2010-2014 [PerfectLine](http://www.perfectline.co), LLC. It is free software, and may be
 redistributed under the terms specified in the LICENSE file.
 
-## How to push new version
+## How to push a new version
 
-```
+```sh
 rake version:bump:patch
 rake gemspec
 ```
-Fix validate_url.gemspec to remove unneeded wrong strings
-```
+
+Manually update `validate_url.gemspec` to remove incorrect strings.
+
+```sh
 gem build validate_url.gemspec
 gem push validate_url-1.0.8.gem
 ```
