@@ -14,7 +14,7 @@ Jeweler::Tasks.new do |jewel|
   jewel.homepage        = 'http://github.com/perfectline/validates_url/tree/master'
   jewel.description     = 'Library for validating urls in Rails.'
   jewel.authors         = ["Tanel Suurhans", "Tarmo Lehtpuu", "Vladimir Krylov"]
-  jewel.files           = FileList["lib/**/*.rb", "lib/locale/*.yml", "*.rb", "MIT-LICENCE", "README.markdown"]
+  jewel.files           = FileList["lib/**/*.rb", "lib/locale/*.yml", "*.rb", "LICENSE.md", "README.md"]
 
   jewel.add_dependency 'activemodel', '>= 3.0.0'
   jewel.add_dependency 'public_suffix'
@@ -27,7 +27,7 @@ RDoc::Task.new(:rdoc) do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
   rdoc.title    = 'ValidatesUrl'
   rdoc.options << '--line-numbers' << '--inline-source'
-  rdoc.rdoc_files.include('README.markdown')
+  rdoc.rdoc_files.include('README.md')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
