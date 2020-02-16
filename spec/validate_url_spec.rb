@@ -95,7 +95,7 @@ describe "URL validation" do
         I18n.locale = :ja
         @user.homepage = "黒麦茶"
         @user.valid?
-        expect(@user.errors[:homepage]).to eq(["は不正なURLです。"])
+        expect(@user.errors[:homepage]).to eq(["は不正なURLです"])
       end
     end
   end
