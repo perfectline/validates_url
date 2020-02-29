@@ -69,7 +69,7 @@ GEM
     psych (3.1.0)
     public_suffix (4.0.1)
     rack (2.0.8)
-    rake (12.3.1)
+    rake (13.0.1)
     rdoc (6.1.1)
     rspec (3.8.0)
       rspec-core (~> 3.8.0)
