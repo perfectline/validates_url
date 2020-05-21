@@ -33,7 +33,7 @@ module ActiveModel
             record.errors.add(attribute, options.fetch(:message), value: value)
           end
         rescue URI::InvalidURIError
-          record.errors.add(attribute, :url, filtered_options(value))
+          record.errors.add(attribute, :url, **filtered_options(value))
         end
       end
 
