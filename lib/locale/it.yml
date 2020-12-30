@@ -1,4 +1,4 @@
 it:
   errors:
     messages:
-      url: non è un URL valido.
+      url: non è un URL valido
