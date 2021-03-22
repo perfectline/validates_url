@@ -82,6 +82,11 @@ describe "URL validation" do
       expect(@user.errors[:homepage]).to eq(["is not a valid URL"])
     end
 
+    it "does not allow an array of urls" do
+      @user.homepage = ["https://foo.com", "https://bar.com"]
+      expect(@user).not_to be_valid
+    end
+
     context "when locale is turkish" do
       it "returns a Turkish default error message" do
         I18n.locale = :tr
@@ -196,6 +201,64 @@ describe "URL validation" do
     it "should not allow non public hosts suffixes" do
       @user.homepage = "http://example.not_a_valid_tld"
       expect(@user).not_to be_valid
+    end
+
+    it "should not allow an array with non public hosts suffixes" do
+      @user.homepage = ["http://www.example.com", "http://example.not_a_valid_tld"]
+      expect(@user).not_to be_valid
+    end
+  end
+
+  context "with accept array" do
+    before do
+      @user = UserWithAcceptArray.new
+    end
+
+    it "allows an array of urls" do
+      @user.homepage = ["https://foo.com", "https://bar.com"]
+      expect(@user).to be_valid
+    end
+
+    it "returns errors on an array of urls if one is invalid" do
+      @user.homepage = ["https://foo.com", "https://foo bar.com"]
+      expect(@user).not_to be_valid
+    end
+
+    it "returns errors on an array of urls if one is nil" do
+      @user.homepage = ["https://foo.com", nil]
+      expect(@user).not_to be_valid
+    end
+
+    it "returns errors on an array of urls if one is empty" do
+      @user.homepage = ["https://foo.com", ""]
+      expect(@user).not_to be_valid
+    end
+
+    it "allows a normal string to be validated without an array" do
+      @user.homepage = "https://www.example.com"
+      expect(@user).to be_valid
+    end
+  end
+
+  context "with accept array with nil" do
+    before do
+      @user = UserWithAcceptArrayWithNil.new
+    end
+
+    it "allows an array of urls with a nil" do
+      @user.homepage = ["https://foo.com", nil]
+      expect(@user).to be_valid
+    end
+  end
+
+  context "with accept array with blank" do
+    before do
+      @user = UserWithAcceptArrayWithBlank.new
+    end
+
+    it "allows an array of urls with a blank" do
+      @user.homepage = ["https://foo.com", ""]
+      expect(@user).to be_valid
     end
   end
 

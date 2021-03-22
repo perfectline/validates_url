@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    validate_url (1.0.11)
+    validate_url (1.0.13)
       activemodel (>= 3.0.0)
       public_suffix
 
@@ -67,7 +67,7 @@ GEM
       multi_xml (~> 0.5)
       rack (>= 1.2, < 3)
     psych (3.1.0)
-    public_suffix (4.0.5)
+    public_suffix (4.0.6)
     rack (2.2.3)
     rake (13.0.1)
     rdoc (6.1.1)
@@ -102,4 +102,4 @@ DEPENDENCIES
   validate_url!
 
 BUNDLED WITH
-   1.16.2
+   1.17.2
