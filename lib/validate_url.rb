@@ -32,10 +32,10 @@ module ActiveModel
           value = value.reject(&:nil?) if options.include?(:allow_nil) && options.fetch(:allow_nil)
           value = value.reject(&:blank?) if options.include?(:allow_blank) && options.fetch(:allow_blank)
 
-          result = value.map { |v| validate_url(record, attribute, v, schemes) }
-          errors = result.flatten.reject(&:nil?)
+          result = value.flat_map { |v| validate_url(record, attribute, v, schemes) }
+          errors = result.reject(&:nil?)
 
-          return errors.length.positive? ? errors.first : true
+          return errors.length.positive? ? errors.first : nil
         end
 
         validate_url(record, attribute, value, schemes)
