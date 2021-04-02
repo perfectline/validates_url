@@ -35,6 +35,9 @@ class Pony < ActiveRecord::Base
 
   # with public suffix database https://publicsuffix.org/
   validates :homepage, url: { public_suffix: true }
+
+  # with Postgres array of urls, described [here](https://guides.rubyonrails.org/active_record_postgresql.html#array)
+  validates :homepage, url: { accept_array: true }
 end
 ```
 
