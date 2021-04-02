@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    validate_url (1.0.11)
+    validate_url (1.0.13)
       activemodel (>= 3.0.0)
       public_suffix
 
@@ -53,13 +53,14 @@ GEM
       semver2
     jwt (2.1.0)
     mime-types (2.99.3)
-    mini_portile2 (2.4.0)
+    mini_portile2 (2.5.0)
     minitest (5.11.3)
     multi_json (1.13.1)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
-    nokogiri (1.10.8)
-      mini_portile2 (~> 2.4.0)
+    nokogiri (1.11.2)
+      mini_portile2 (~> 2.5.0)
+      racc (~> 1.4)
     oauth2 (1.4.1)
       faraday (>= 0.8, < 0.16.0)
       jwt (>= 1.0, < 3.0)
@@ -67,7 +68,8 @@ GEM
       multi_xml (~> 0.5)
       rack (>= 1.2, < 3)
     psych (3.1.0)
-    public_suffix (4.0.5)
+    public_suffix (4.0.6)
+    racc (1.5.2)
     rack (2.2.3)
     rake (13.0.1)
     rdoc (6.1.1)
