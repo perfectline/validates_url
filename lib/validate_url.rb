@@ -35,7 +35,7 @@ module ActiveModel
           result = value.flat_map { |v| validate_url(record, attribute, v, schemes) }
           errors = result.reject(&:nil?)
 
-          return errors.length.positive? ? errors.first : nil
+          return errors.any? ? errors.first : true
         end
 
         validate_url(record, attribute, value, schemes)
