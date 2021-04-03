@@ -69,7 +69,6 @@ GEM
       rack (>= 1.2, < 3)
     psych (3.1.0)
     public_suffix (4.0.6)
-    racc (1.5.2)
     rack (2.2.3)
     rake (13.0.1)
     rdoc (6.1.1)
@@ -104,4 +103,4 @@ DEPENDENCIES
   validate_url!
 
 BUNDLED WITH
-   1.16.2
+   1.17.2
