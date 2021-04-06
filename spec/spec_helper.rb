@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 $LOAD_PATH.unshift(File.dirname(__FILE__) + '/../lib')
 $LOAD_PATH.unshift(File.dirname(__FILE__) + '/resources')
 $LOAD_PATH.unshift(File.dirname(__FILE__))
@@ -11,8 +13,8 @@ require 'validate_url/rspec_matcher'
 
 ActiveRecord::Migration.verbose = false
 ActiveRecord::Base.establish_connection(
-    "adapter"   => "sqlite3",
-    "database"  => ":memory:"
+    "adapter" => "sqlite3",
+    "database" => ":memory:"
 )
 
 require File.join(File.dirname(__FILE__), '..', 'init')
@@ -30,3 +32,5 @@ autoload :UserWithPublicSuffix,           'resources/user_with_public_suffix'
 autoload :UserWithAcceptArray,            'resources/user_with_accept_array'
 autoload :UserWithAcceptArrayWithNil,     'resources/user_with_accept_array_with_nil'
 autoload :UserWithAcceptArrayWithBlank,   'resources/user_with_accept_array_with_blank'
+
+RSpec.configure(&:disable_monkey_patching!)
