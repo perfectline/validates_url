@@ -62,7 +62,7 @@ module ActiveModel
         unless valid_raw_url && valid_scheme && valid_no_local && valid_suffix
           record.errors.add(attribute, options.fetch(:message), value: value)
         end
-      rescue URI::InvalidURIError
+      rescue URI::InvalidURIError, URI::InvalidComponentError
         record.errors.add(attribute, :url, **filtered_options(value))
       end
     end

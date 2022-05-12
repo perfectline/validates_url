@@ -111,6 +111,12 @@ RSpec.describe 'URL validation' do
         expect(user.errors[:homepage]).to eq(['は不正なURLです'])
       end
     end
+
+    it 'does not allow a mailto url without local-part' do
+      user.homepage = 'mailto:@bar.com'
+
+      expect(user).not_to be_valid
+    end
   end
 
   context 'with allow nil' do
