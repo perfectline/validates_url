@@ -49,6 +49,10 @@ Gem::Specification.new do |s|
   s.rubygems_version = "3.0.8".freeze
   s.summary = "Library for validating urls in Rails.".freeze
 
+  s.metadata = {
+    "changelog_uri".freeze => "https://github.com/perfectline/validates_url/blob/master/CHANGELOG.md".freeze
+  }
+
   if s.respond_to? :specification_version then
     s.specification_version = 4
 
