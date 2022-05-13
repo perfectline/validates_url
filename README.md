@@ -96,12 +96,17 @@ redistributed under the terms specified in the LICENSE file.
 
 ## How to push a new version
 
+1. Bump the version number automatically:
+
 ```sh
 rake version:bump:patch
 rake gemspec
 ```
 
-Manually update `validate_url.gemspec` to remove incorrect strings.
+2. Manually update `validate_url.gemspec` to remove incorrect strings
+3. Update `CHANGELOG.md` to describe what is changing in the new version
+4. Commit and push the updated version information, gemspec and changelog to GitHub
+5. Build and push the gem to RubyGems
 
 ```sh
 gem build validate_url.gemspec
