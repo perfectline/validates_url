@@ -48,38 +48,18 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/perfectline/validates_url/tree/master".freeze
   s.rubygems_version = "3.0.8".freeze
   s.summary = "Library for validating urls in Rails.".freeze
+  s.specification_version = 4
 
   s.metadata = {
     "changelog_uri".freeze => "https://github.com/perfectline/validates_url/blob/master/CHANGELOG.md".freeze
   }
 
-  if s.respond_to? :specification_version then
-    s.specification_version = 4
+  s.add_dependency("activemodel", ">= 3.0.0")
+  s.add_dependency("public_suffix", ">= 0")
 
-    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_development_dependency(%q<jeweler>.freeze, [">= 0"])
-      s.add_development_dependency(%q<sqlite3>.freeze, [">= 0"])
-      s.add_development_dependency(%q<activerecord>.freeze, [">= 0"])
-      s.add_development_dependency(%q<rspec>.freeze, [">= 0"])
-      s.add_development_dependency(%q<diff-lcs>.freeze, [">= 1.1.2"])
-      s.add_runtime_dependency(%q<activemodel>.freeze, [">= 3.0.0"])
-      s.add_runtime_dependency(%q<public_suffix>.freeze, [">= 0"])
-    else
-      s.add_dependency(%q<jeweler>.freeze, [">= 0"])
-      s.add_dependency(%q<sqlite3>.freeze, [">= 0"])
-      s.add_dependency(%q<activerecord>.freeze, [">= 0"])
-      s.add_dependency(%q<rspec>.freeze, [">= 0"])
-      s.add_dependency(%q<diff-lcs>.freeze, [">= 1.1.2"])
-      s.add_dependency(%q<activemodel>.freeze, [">= 3.0.0"])
-      s.add_dependency(%q<public_suffix>.freeze, [">= 0"])
-    end
-  else
-    s.add_dependency(%q<jeweler>.freeze, [">= 0"])
-    s.add_dependency(%q<sqlite3>.freeze, [">= 0"])
-    s.add_dependency(%q<activerecord>.freeze, [">= 0"])
-    s.add_dependency(%q<rspec>.freeze, [">= 0"])
-    s.add_dependency(%q<diff-lcs>.freeze, [">= 1.1.2"])
-    s.add_dependency(%q<activemodel>.freeze, [">= 3.0.0"])
-    s.add_dependency(%q<public_suffix>.freeze, [">= 0"])
-  end
+  s.add_development_dependency("activerecord", ">= 3.0.0")
+  s.add_development_dependency("diff-lcs", ">= 1.1.2")
+  s.add_development_dependency("rake", ">= 11.0")
+  s.add_development_dependency("rspec", "~> 3")
+  s.add_development_dependency("sqlite3", ">= 0")
 end
