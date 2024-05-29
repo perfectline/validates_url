@@ -50,7 +50,7 @@ module ActiveModel
       end
 
       def validate_url(record, attribute, value, schemes)
-        uri = URI.parse(value)
+        uri = URI.parse(URI::Parser.new.escape(value)
         host = uri && uri.host
         scheme = uri && uri.scheme
 
