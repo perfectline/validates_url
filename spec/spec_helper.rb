@@ -30,6 +30,7 @@ autoload :UserWithCustomMessage,          'resources/user_with_custom_message'
 autoload :UserWithNoLocal,                'resources/user_with_no_local'
 autoload :UserWithPublicSuffix,           'resources/user_with_public_suffix'
 autoload :UserWithAcceptArray,            'resources/user_with_accept_array'
+autoload :UserWithAcceptArrayWithMessage, 'resources/user_with_accept_array_with_message'
 autoload :UserWithAcceptArrayWithNil,     'resources/user_with_accept_array_with_nil'
 autoload :UserWithAcceptArrayWithBlank,   'resources/user_with_accept_array_with_blank'
 

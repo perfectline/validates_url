@@ -277,6 +277,17 @@ RSpec.describe 'URL validation' do
     end
   end
 
+  context "with accept array with message" do
+    let!(:user) { UserWithAcceptArrayWithMessage.new }
+
+    it "uses the custom message" do
+      user.homepage = ["https://foo.com", "https://foo bar.com"]
+      user.valid?
+
+      expect(user.errors[:homepage]).to eq(["wrong"])
+    end
+  end
+
   context 'with legacy syntax' do
     let!(:user) { UserWithLegacySyntax.new }
 
@@ -346,6 +357,13 @@ RSpec.describe 'URL validation' do
 
     it 'uses custom message' do
       user.homepage = 'invalid'
+      user.valid?
+
+      expect(user.errors[:homepage]).to eq(['wrong'])
+    end
+
+    it 'uses custom message for URIs that can not be parsed' do
+      user.homepage = ':::'
       user.valid?
 
       expect(user.errors[:homepage]).to eq(['wrong'])
