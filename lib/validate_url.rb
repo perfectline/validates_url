@@ -23,7 +23,7 @@ module ActiveModel
         if value.respond_to?(:each)
           # Error out if we're not allowing arrays
           if !options.include?(:accept_array) || !options.fetch(:accept_array)
-            record.errors.add(attribute, :url, **filtered_options(value))
+            record.errors.add(attribute, message, **filtered_options(value))
           end
 
           # We have to manually handle `:allow_nil` and `:allow_blank` since it's not caught by
@@ -50,20 +50,25 @@ module ActiveModel
       end
 
       def validate_url(record, attribute, value, schemes)
-        uri = URI.parse(URI::Parser.new.escape(value))
+        uri = value && URI.parse(URI::Parser.new.escape(value))
         host = uri && uri.host
         scheme = uri && uri.scheme
 
+        valid_host = host && !host.empty?
         valid_raw_url = scheme && value =~ /\A#{URI::regexp([scheme])}\z/
         valid_scheme = host && scheme && schemes.include?(scheme)
         valid_no_local = !options.fetch(:no_local) || (host && host.include?('.'))
         valid_suffix = !options.fetch(:public_suffix) || (host && PublicSuffix.valid?(host, :default_rule => nil))
 
-        unless valid_raw_url && valid_scheme && valid_no_local && valid_suffix
-          record.errors.add(attribute, options.fetch(:message), value: value)
+        unless valid_host && valid_raw_url && valid_scheme && valid_no_local && valid_suffix
+          record.errors.add(attribute, message, value: value)
         end
       rescue URI::InvalidURIError, URI::InvalidComponentError
-        record.errors.add(attribute, :url, **filtered_options(value))
+        record.errors.add(attribute, message, **filtered_options(value))
+      end
+
+      def message
+        options.fetch(:message)
       end
     end
 
