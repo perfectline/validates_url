@@ -1,46 +1,27 @@
 name: Run tests
 
-on:
-  pull_request:
-  push:
-    branches:
-      - '**'
-    tags-ignore:
-      - 'v*'
+on: [push, pull_request]
 
 jobs:
   test:
-    name: "Run tests"
+    name: "Run tests for ${{matrix.ruby}}"
     if: "! contains(toJSON(github.event.commits.latest.message), '[skip ci]')"
     runs-on: ubuntu-latest
+
     strategy:
       fail-fast: false
       matrix:
-        include:
-          # - ruby: 3.0 # Not working due to nokogiri
-          - ruby: 2.7
-          - ruby: 2.6
-          - ruby: 2.5
-          # - ruby: 2.4 # Not working due to nokogiri
-          # - ruby: 2.3 # Not working due to nokogiri
-    container:
-      image: ruby:${{ matrix.ruby }}
-      env:
-        CI: true
+        ruby: ["2.3", "2.4", "2.5", "2.6", "2.7", "3.0", "3.1", "3.2", ruby-head]
+
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
-        with:
-          path: vendor/bundle
-          key: bundle-${{ matrix.ruby }}-${{ hashFiles('**/*.gemspec') }}-${{ hashFiles('**/Gemfile') }}
-          restore-keys: |
-            bundle-${{ matrix.ruby }}-${{ hashFiles('**/*.gemspec') }}-${{ hashFiles('**/Gemfile') }}
-            bundle-${{ matrix.ruby }}-
-      - name: Install Bundler version from Gemfile
-        run: gem install bundler -v $(grep -A 1 "BUNDLED WITH" Gemfile.lock | tail -n 1)
-      - name: Bundle install
-        run: |
-          bundle config path vendor/bundle
-          bundle install
-      - name: Run RSpec
-        run: bundle exec rspec
+    - uses: actions/checkout@v3
+    - name: Remove Gemfile.lock
+      run: |
+        rm Gemfile.lock
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true # 'bundle install' and cache gems
+        ruby-version: ${{ matrix.ruby }}
+    - name: Run tests
+      run: bundle exec rake

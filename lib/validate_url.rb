@@ -56,7 +56,7 @@ module ActiveModel
 
         valid_host = host && !host.empty?
         valid_raw_url = scheme && value =~ /\A#{URI::regexp([scheme])}\z/
-        valid_scheme = host && scheme && schemes.include?(scheme)
+        valid_scheme = host && !host.empty? && scheme && schemes.include?(scheme)
         valid_no_local = !options.fetch(:no_local) || (host && host.include?('.'))
         valid_suffix = !options.fetch(:public_suffix) || (host && PublicSuffix.valid?(host, :default_rule => nil))
 
