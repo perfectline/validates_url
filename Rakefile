@@ -14,6 +14,7 @@ Jeweler::Tasks.new do |jewel|
   jewel.homepage        = 'http://github.com/perfectline/validates_url/tree/master'
   jewel.description     = 'Library for validating urls in Rails.'
   jewel.authors         = ["Tanel Suurhans", "Tarmo Lehtpuu", "Vladimir Krylov"]
+  jewel.license         = 'MIT'
   jewel.files           = FileList["lib/**/*.rb", "lib/locale/*.yml", "*.rb", "LICENSE.md", "README.md"]
 
   jewel.add_dependency 'activemodel', '>= 3.0.0'
