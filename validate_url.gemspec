@@ -48,6 +48,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/perfectline/validates_url/tree/master".freeze
   s.rubygems_version = "3.0.8".freeze
   s.summary = "Library for validating urls in Rails.".freeze
+  s.license = "MIT"
 
   s.metadata = {
     "changelog_uri".freeze => "https://github.com/perfectline/validates_url/blob/master/CHANGELOG.md".freeze
